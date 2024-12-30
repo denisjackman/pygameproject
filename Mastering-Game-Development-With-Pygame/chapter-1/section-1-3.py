@@ -16,6 +16,7 @@ def draw_game_screen():
     if debug:
         print("drawing the screen")
 
+
 def keyboard_event():
     ''' keyboard pressed '''
     print("keyboard key pressed")
@@ -49,6 +50,11 @@ def main():
                     mouse_event()
         # game logic goes here 
         update_game_state()
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_LEFT]:
+            print("going left")
+        if keys[pygame.K_RIGHT]:
+            print("going right")
         # drawing logic goes here
         draw_game_screen()
         # flip the screen 
