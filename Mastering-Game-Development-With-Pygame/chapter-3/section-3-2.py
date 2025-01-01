@@ -1,9 +1,13 @@
 ''' section 1.3 '''
-import pygame 
+import sys 
+import pygame
 
-background_colour = pygame.Color("white")
-text_color = pygame.Color("black")
-highlight_color = pygame.Color("red")
+sys.path.append("../../utils")
+import rgb
+
+background_colour = pygame.Color(rgb.WHITE)
+text_color = pygame.Color(rgb.BLACK)
+highlight_color = pygame.Color(rgb.RED)
 
 
 def main():
@@ -21,11 +25,24 @@ def main():
         # game logic goes here 
 
         # drawing logic goes here
-        screen.fill(background_colour)
+        screen.fill(rgb.BLACK)
         font = pygame.font.Font(None, 36)
         text_surface = font.render("Hello Pygame!",
                                    True,
-                                   text_color)
+                                   rgb.IVORY)
+        pygame.draw.rect(screen,
+                         rgb.YELLOW,
+                         (100, 100, 200, 150))
+        pygame.draw.circle(screen,
+                           rgb.HONEYDEW_4,
+                           (400, 300), 
+                           50)
+        pygame.draw.polygon(screen,
+                            rgb.DIM_GRAY,
+                            [(600, 100),
+                             (700,200),
+                             (550, 20)])
+
         screen.blit(text_surface,
                     (300, 300))
 
