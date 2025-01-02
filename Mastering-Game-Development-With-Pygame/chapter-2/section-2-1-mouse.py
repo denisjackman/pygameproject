@@ -1,4 +1,4 @@
-''' section 1.3 '''
+''' section 2.1 mouse '''
 import pygame 
 
 

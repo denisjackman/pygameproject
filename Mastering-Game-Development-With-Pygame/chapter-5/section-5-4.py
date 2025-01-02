@@ -1,9 +1,10 @@
-''' section 3.3 '''
+''' section 5.4 '''
 import sys 
 import pygame
 
 sys.path.append("../../utils")
 import rgb
+import djpg
 
 
 def main():
@@ -12,21 +13,39 @@ def main():
     pygame.init()
     # create a game window 
     screen = pygame.display.set_mode((800, 600))
+    # set the game running flag to true
     running = True
-    font = pygame.font.Font('../../fonts/halfelven.ttf', 36)
+
+    player_x = 400
+    player_y = 500
+    player_speed = 5
+
+    # run the game loop
     while running:
+        # check for user input events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 # handle window close event 
                 running = False
+            
         # game logic goes here 
-        screen.fill(rgb.BLACK)
-        text_surface = font.render("Hello, Pygame!", True, rgb.WHITE)
-        screen.blit(text_surface, (300, 300))
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_LEFT]:
+            player_x -= player_speed
+        if keys[pygame.K_RIGHT]:
+            player_x += player_speed
+            
         # drawing logic goes here
+
+        # clear the screen
+        screen.fill(rgb.BLACK)
+        pygame.draw.rect(screen,
+                         rgb.RED,
+                         (player_x, player_y, 50, 50))
 
         # flip the screen        
         pygame.display.flip()
+    # close pygame
     pygame.quit()
 
  

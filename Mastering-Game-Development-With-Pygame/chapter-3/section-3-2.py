@@ -1,4 +1,4 @@
-''' section 1.3 '''
+''' section 3.2 '''
 import sys 
 import pygame
 

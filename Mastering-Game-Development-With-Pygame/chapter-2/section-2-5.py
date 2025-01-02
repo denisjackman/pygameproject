@@ -1,4 +1,4 @@
-''' section 1.3 '''
+''' section 2.5 '''
 import pygame 
 
 
