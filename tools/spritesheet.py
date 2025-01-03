@@ -27,7 +27,7 @@ def main():
     frames = djpg.load_sprite_sheet(SPRITESHEET, SPRITE_WIDTH, SPRITE_HEIGHT)
     font = pygame.font.Font(None, 25)
     clock = pygame.time.Clock()
-
+    limit = len(frames)-2
     # run the game loop
     while running:
         # check for user input events
@@ -38,8 +38,8 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
                     frame_count += 1
-                    if frame_count > len(frames) -1 :
-                        frame_count = len(frames)
+                    if frame_count >= limit:
+                        frame_count = limit
                 elif event.key == pygame.K_DOWN:
                     frame_count -= 1
                     if frame_count < 0:
@@ -47,7 +47,7 @@ def main():
         # drawing logic goes here
         # clear the screen
         screen.fill(rgb.BLACK)
-        text_surface = font.render(f"{frame_count} ({len(frames)})", True, rgb.WHITE)
+        text_surface = font.render(f"{frame_count} ({limit})", True, rgb.WHITE)
         screen.blit(text_surface, (50, 10))
         screen.blit(frames[frame_count], (15, 40))
 

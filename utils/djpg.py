@@ -1,5 +1,7 @@
 ''' A set of pygame utilities '''
-import pygame 
+import pygame
+import heapq
+
 
 def load_sprite_sheet(lss_sheet, lss_width, lss_height):
     ''' takes a sprite sheet, width and height of the frames.
@@ -12,3 +14,5 @@ def load_sprite_sheet(lss_sheet, lss_width, lss_height):
             lss_frame = lss_sprite_sheet.subsurface(pygame.Rect(lss_x, lss_y, lss_width, lss_height))
             lss_frames.append(lss_frame)
     return lss_frames
+
+
