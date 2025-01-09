@@ -162,6 +162,77 @@ def check_if_draw():
     return not (check_if_anyone_won()) and check_if_board_is_full()
 
 
+def is_winning_move(player, row, col):
+    ''' is this a winning move '''
+    n = len(board)
+    if all(board[row][j] == player for j in range(n)):
+        return True
+    if all(board[i][col] == player for i in range(n)):
+        return True
+    if row == col and all (board[i][i] == player for i in range(n)):
+        return True
+    if row + col  == n - 1 and all(board[i][n - i - 1] == player for i in range(n)):
+        return True 
+    return False
+
+
+def get_empty_positions():
+    ''' return the emprty slots'''
+    empty_positions = []
+    for i, row in enumerate(board):
+        for j, cell in enumerate(row):
+            if cell == 0:
+                empty_positions.append((i, j))
+    return empty_positions
+
+
+def run_better_algorithim_to_place_O():
+    ''' better O player AI '''
+    grid_size = len(board)
+    empty_positions = get_empty_positions()
+    num_moves = sum(1 for row in board for cell in row if cell != 0)
+    if num_moves == 1:
+        center = grid_size // 2
+        if board[center][center] == 0:
+            board[center][center] = 'O'
+            return True
+        else:
+            for row,col in [(0, 0),
+                            (0, grid_size - 1),
+                            (grid_size - 1, grid_size -1 )]:
+                if board[row][col] == 0:
+                    board[row][col] = 'O'
+                    return True
+    for row,col in empty_positions:
+        board[row][col] = "O"
+        if is_winning_move("O", row, col):
+            return True
+        board[row][col] = 0
+
+    for row,col in empty_positions:
+        board[row][col] = "X"
+        if is_winning_move("X", row, col):
+            board[row][col] = "O"
+            return True
+        board[row][col] = 0
+
+    if board[0][0] == 'O' or board[0][grid_size -1] == 'O' or board[grid_size -1][0] == 'O' or board[grid_size -1][grid_size -1] == 'O':
+        for row, col in [(0,0), (0, grid_size -1), (grid_size -1, 0), (grid_size -1 , grid_size -1)]:
+            if board[row][col] == 0:
+                board[row][col] = "O"
+                return True
+    for row,col in empty_positions:
+        if row not in [0, grid_size -1] and col not in [0, grid_size -1]:
+            board[row][col] = "O"
+            return True
+                
+    for row,col in empty_positions:
+        board[row][col] = "O"
+        return True
+
+    return False
+
+                
 def main():
     ''' Main Function'''
     global game_window
